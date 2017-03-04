@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>ReactJS - state tutorial</title>
+  <!-- Script tags including React -->
+	<link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,500,700,900">
+  <link type="text/css" rel="stylesheet" href="css/main.css">
+  <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.3.1/react.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.3.1/react-dom.min.js"></script>
+  <script src="https://npmcdn.com/babel-core@5.8.38/browser.min.js"></script>
+</head>
+<body>
+
+<div id="app"></div>
+
+<script type="text/babel">
+
+// ES6 syntax
+var CheckBoxES5 = React.createClass({
+getInitialState: function() {
+  return {checked: true}
+},
+
+handleChecked() {
+  this.setState({ checked: !this.state.checked })
+},
+
+  render: function(){
+    let msg = (this.state.checked) ? 'checked' : 'unchecked';
+
+      return(
+        <div className="CheckBoxContainer">
+          <h2>ReactJS state practice with ES5 syntax</h2>
+          <input type="checkbox" defaultChecked={this.state.checked} onChange={this.handleChecked}/>
+          <h4>the checkbox is {msg}!</h4>
+        </div>
+      );
+  }
+});
+
+// ES6 syntax
+class CheckBoxES6 extends React.Component {
+  constructor(props) {
+  super(props);
+  this.state = { checked: false };
+}
+
+handleChecked() {
+  this.setState({ checked: !this.state.checked });
+}
+
+  render(){
+      return(
+        <div className="CheckBoxContainer">
+          <h2>ReactJS state practice with ES6 syntax</h2>
+          <input type="checkbox" defaultChecked={this.state.checked} onClick={this.handleChecked.bind(this)}/>
+          <h4>the checkbox is { this.state.checked ? 'checked' : 'unchecked'}!</h4>
+        </div>
+      );
+  }
+}
+
+class MainContainer extends React.Component{
+  render(){
+    return(
+      <div>
+      <h1>simple React State examples</h1>
+      <CheckBoxES5/>
+      <CheckBoxES6/>
+      </div>
+    );
+  }
+}
+
+    ReactDOM.render(<MainContainer/>, document.getElementById('app'));
+  </script>
+</body>
+</html>
